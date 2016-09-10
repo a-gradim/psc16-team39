@@ -1,5 +1,6 @@
-
-map=fillMap(data, 725, 1285);
+res_x = size(frame,1);
+res_y = size(frame,2);
+map=fillMap(data, res_y+5, res_x+5);
 
 
 figure(1)

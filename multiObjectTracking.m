@@ -86,19 +86,19 @@ while ~isDone(obj.reader)
     deleteLostTracks();
     createNewTracks();
     
-   % displayTrackingResults();
+    displayTrackingResults();
 end
 
-map=fillMap(data, 640, 360); %fill plane
+res_x = size(frame,1);
+res_y = size(frame,2);
+map=fillMap(data, res_y+5, res_x+5);
 
 
 figure(1)
 hold on
-surface(map,'EdgeColor','none') %show plane
+surface(map,'EdgeColor','none')
 
-imshow(frame) %show image below plane
-
-
+imshow(frame)
 alpha(.50);
 
 
@@ -440,7 +440,7 @@ alpha(.50);
         end
         
         % Display the mask and the frame.
-        obj.maskPlayer.step(mask);        
+        %obj.maskPlayer.step(mask);        
         obj.videoPlayer.step(frame);
     end
 

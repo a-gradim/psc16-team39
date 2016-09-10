@@ -1,7 +1,7 @@
 function [ plane ] = fillMap( data ,vid_res_x, vid_res_y)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-    plane=zeros(725 ,1285);
+    plane=zeros(vid_res_y ,vid_res_x);
     plane(:,:)=-0.1;
     for i=1:size(data,1)
         for j=1:size(data,2)
