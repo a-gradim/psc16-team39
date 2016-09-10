@@ -142,7 +142,7 @@ hold off
 %     [assignments, unassignedTracks, unassignedDetections] = ...
 %         detectionToTrackAssignment();
 %     
-<<<<<<< HEAD:DoTheMagic.m
+
 %     updateAssignedTracks();
 %     updateUnassignedTracks();
 %     deleteLostTracks();
@@ -150,7 +150,7 @@ hold off
 %     
 %     displayTrackingResults();
 % end
-=======
+
 %     end;
    
     for num=1:size(centroids,1)
@@ -185,7 +185,7 @@ alpha(.50);
 
 
 
->>>>>>> 8b6fda8b30069a79895f7bd14335cf2f5cdfa9c5:multiObjectTracking.m
+
 
 %% Create System Objects
 % Create System objects used for reading the video frames, detecting
@@ -197,12 +197,12 @@ alpha(.50);
         % objects in each frame, and playing the video.
         
         % Create a video file reader.
-<<<<<<< HEAD:DoTheMagic.m
+
         obj.reader = vision.VideoFileReader('atrium.avi');
-=======
+
         obj.reader = vision.VideoFileReader('video2.mp4');
         
->>>>>>> 8b6fda8b30069a79895f7bd14335cf2f5cdfa9c5:multiObjectTracking.m
+
         
         % Create two video players, one to display the video,
         % and one to display the foreground mask.
@@ -548,13 +548,12 @@ alpha(.50);
 % filters for every object. Also, you can incorporate other cues for
 % associating detections over time, such as size, shape, and color. 
 
-<<<<<<< HEAD:DoTheMagic.m
-=======
+
 %displayEndOfDemoMessage(mfilename)
 
 
 
->>>>>>> 8b6fda8b30069a79895f7bd14335cf2f5cdfa9c5:multiObjectTracking.m
+
 end
 
 
