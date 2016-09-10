@@ -89,13 +89,23 @@ while ~isDone(obj.reader)
     displayTrackingResults();
 end
 
-
-map=fillMap(data, 640, 360);
-GradMap=gradient(map);
-%surface(map)
+map=fillMap(data, 640, 360); %fill plane
 
 
-surface(map,image,'EdgeColor','none')
+figure(1)
+hold on
+surface(map,'EdgeColor','none') %show plane
+
+imshow(frame) %show image below plane
+
+
+
+
+
+
+alpha(.50);
+
+
 
 pause(5);
 %% Create System Objects

@@ -1,6 +1,4 @@
 
-
-
 map=fillMap(data, 640, 360);
 
 
@@ -12,11 +10,11 @@ imshow(frame)
 alpha(.50);
 
 
-figure(2)
-hold on
-intMap=diff(map);
-surface(intMap,'EdgeColor','none')
-
-imshow(frame)
-alpha(.50);
+% figure(2)
+% hold on
+% intMap=diff(map);
+% surface(intMap,'EdgeColor','none')
+% 
+% imshow(frame)
+% alpha(.50);
 

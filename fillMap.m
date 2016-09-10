@@ -11,6 +11,8 @@ function [ plane ] = fillMap( data ,vid_res_x, vid_res_y)
 
         end
     end
+    maxVal=max(max(plane))
+    plane(:,:)=plane(:,:).*255./maxVal;
 
 end
 
