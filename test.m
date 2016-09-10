@@ -1,5 +1,5 @@
 
-map=fillMap(data, 640, 360);
+map=fillMap(data, 725, 1285);
 
 
 figure(1)

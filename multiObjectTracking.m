@@ -86,7 +86,7 @@ while ~isDone(obj.reader)
     deleteLostTracks();
     createNewTracks();
     
-    displayTrackingResults();
+   % displayTrackingResults();
 end
 
 map=fillMap(data, 640, 360); %fill plane
@@ -99,15 +99,11 @@ surface(map,'EdgeColor','none') %show plane
 imshow(frame) %show image below plane
 
 
-
-
-
-
 alpha(.50);
 
 
 
-pause(5);
+
 %% Create System Objects
 % Create System objects used for reading the video frames, detecting
 % foreground objects, and displaying results.
@@ -118,7 +114,7 @@ pause(5);
         % objects in each frame, and playing the video.
         
         % Create a video file reader.
-        obj.reader = vision.VideoFileReader('atrium.mp4');
+        obj.reader = vision.VideoFileReader('video2.mp4');
         
         
         % Create two video players, one to display the video,
@@ -466,7 +462,7 @@ pause(5);
 % associating detections over time, such as size, shape, and color. 
 
 %displayEndOfDemoMessage(mfilename)
-pause(5);
+
 
 
 end
