@@ -16,12 +16,15 @@ tracks = initializeTracks();
 % ID of the next track
 nextId = 1; 
 
-% % Number of frame
- frameNum= 1;
-
 % Get first frame and save it 
-image = readFrame();
+firstFrame = readFrame();
 
+% Create the empty matrix for the incidence counter
+incidenceLog = zeros(size(firstFrame,1), size(firstFrame,2) );
+
+
+% Standard deviation of the gaussian filter
+standardDeviation = 2;
 
 %% Until the end, keep analising 
 
@@ -33,18 +36,12 @@ while ~isDone(obj.reader)
     
     % get the center, the bounding box and the mask
     [centroids, bboxes, mask] = detectObjects(frame);
-    
   
-    % Spit to terminal
-    for num=1:size(centroids,1)
-        fprintf('%d %d\n',round(centroids(num,1)),round(centroids(num,2)))
-        density_hist(frameNum,num,1)=round(centroids(num,1));
-        density_hist(frameNum,num,2)=round(centroids(num,2));
-    end
+    % Find and log the found centroids
     
-    % Increase the index of current frame
-    frameNum = frameNum+1
-     
+    incidenceLog(round(centroids(:,2)), round(centroids(:,1)) ) = ...
+        incidenceLog(round(centroids(:,2)), round(centroids(:,1)) ) + 1;
+
     % Using the Kalman Filter, predict the next position
     predictNewLocationsOfTracks();
     
@@ -64,61 +61,25 @@ while ~isDone(obj.reader)
     createNewTracks();
     
     % Output for Humans
-    %displayTrackingResults();
+    displayTrackingResults();
 end
 
 %% Now show me something
 
-%map=fillMap(density_hist, size(frame, 1) ,size(frame, 2));
-map = fillMap();
 
+densityMap = imgaussfilt(incidenceLog, standardDeviation);
+densityMap(:, :) =  densityMap(:, :) - 0.001;
 figure(1)
 hold on
-surface(map,'EdgeColor','none')
 
-imshow(image)
+
+imshow(firstFrame)
+
+surface(densityMap, 'EdgeColor', 'none')
 alpha(.50);
 hold off
 
-figure(2)
-hold on
-intMap=diff(map);
-surface(intMap,'EdgeColor','none')
 
-imshow(image)
-alpha(.50);
-hold off
-figure(3)
-surf(map)
-
-%% 
-function [ plane ] = coverPixels(plane,x, y, radius )
-%UNTITLED6 Summary of this function goes here
-%   Detailed explanation goes here
-    for i1=1:1:radius
-        for j1=1:1:radius
-            plane(round(density_hist(x,y,2))+i1,round(density_hist(x,y,1))+j1)=plane(round(density_hist(x,y,2))+i1,round(density_hist(x,y,1))+j1)+50;
-        end;
-    end;
-
-
-end
-
-%%
-function [ plane ] = fillMap()
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-   
-    plane=zeros(size(frame, 1) ,size(frame, 2)) - 0.1;
-    
-    for i2=1:size(density_hist,1)
-        for j2=1:size(density_hist,2)
-            if(density_hist(i2,j2,1)>0 || density_hist(i2,j2,2)>0)
-               plane = coverPixels(plane, i2,j2,5);
-            end
-        end
-    end
-end
 
 %% Motion-Based Multiple Object Tracking
 % This example shows how to perform automatic detection and motion-based
@@ -523,7 +484,7 @@ end
         end
         
         % Display the mask and the frame.
-        obj.maskPlayer.step(mask);        
+        %obj.maskPlayer.step(mask);        
         obj.videoPlayer.step(frame);
     end
 
