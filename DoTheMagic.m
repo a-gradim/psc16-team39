@@ -81,7 +81,6 @@ imshow(firstFrame)
 
 surface(densityMap, 'EdgeColor', 'none')
 alpha(0.7)
-colorbar
 hold off
 
 
