@@ -5,6 +5,9 @@ clear; close; clc;
 
 %% Prep Everything
 
+% Video to analyze
+video_name = 'atrium.avi';
+
 % Create System objects used for reading video, detecting moving objects,
 % and displaying the results
 
@@ -21,6 +24,7 @@ firstFrame = readFrame();
 
 % Create the empty matrix for the incidence counter
 incidenceLog = zeros(size(firstFrame,1), size(firstFrame,2) );
+
 
 
 % Standard deviation of the gaussian filter
@@ -152,36 +156,36 @@ hold off
 % end
 
 %     end;
-   
-    for num=1:size(centroids,1)
-        fprintf('%d %d\n',round(centroids(num,1)),round(centroids(num,2)))
-        data(frameNumb,num,1)=round(centroids(num,1));
-        data(frameNumb,num,2)=round(centroids(num,2));
-    end
-     frameNumb = frameNumb+1
-    predictNewLocationsOfTracks();
-    [assignments, unassignedTracks, unassignedDetections] = ...
-        detectionToTrackAssignment();
-    
-    updateAssignedTracks();
-    updateUnassignedTracks();
-    deleteLostTracks();
-    createNewTracks();
-    
-    displayTrackingResults();
-end
-
-res_x = size(frame,1);
-res_y = size(frame,2);
-map=fillMap(data, res_y+5, res_x+5);
-
-
-figure(1)
-hold on
-surface(map,'EdgeColor','none')
-
-imshow(frame)
-alpha(.50);
+%    
+%     for num=1:size(centroids,1)
+%         fprintf('%d %d\n',round(centroids(num,1)),round(centroids(num,2)))
+%         data(frameNumb,num,1)=round(centroids(num,1));
+%         data(frameNumb,num,2)=round(centroids(num,2));
+%     end
+%      frameNumb = frameNumb+1
+%     predictNewLocationsOfTracks();
+%     [assignments, unassignedTracks, unassignedDetections] = ...
+%         detectionToTrackAssignment();
+%     
+%     updateAssignedTracks();
+%     updateUnassignedTracks();
+%     deleteLostTracks();
+%     createNewTracks();
+%     
+%     displayTrackingResults();
+% end
+% 
+% res_x = size(frame,1);
+% res_y = size(frame,2);
+% map=fillMap(data, res_y+5, res_x+5);
+% 
+% 
+% figure(1)
+% hold on
+% surface(map,'EdgeColor','none')
+% 
+% imshow(frame)
+% alpha(.50);
 
 
 
@@ -198,11 +202,7 @@ alpha(.50);
         
         % Create a video file reader.
 
-        obj.reader = vision.VideoFileReader('atrium.avi');
-
-        obj.reader = vision.VideoFileReader('video2.mp4');
-        
-
+        obj.reader = vision.VideoFileReader(video_name);
         
         % Create two video players, one to display the video,
         % and one to display the foreground mask.
