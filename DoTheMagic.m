@@ -19,7 +19,7 @@ tracks = initializeTracks();
 % ID of the next track
 nextId = 1; 
 
-% Get first frame and save it 
+% Get first frame and save it   
 firstFrame = readFrame();
 
 % Create the empty matrix for the incidence counter
